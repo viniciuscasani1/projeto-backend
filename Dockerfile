@@ -1,4 +1,6 @@
-FROM openjdk:10-jre-slim
+FROM maven:jdk-11-slim
+
+run mvn clean install
 
 COPY ./target/projeto-backend.jar /usr/src/projeto/
 

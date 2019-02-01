@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.projetobackend.model.Ordem;
-import br.com.projetobackend.repoistory.OrdemRepository;
+import br.com.projetobackend.repository.OrdemRepository;
 import br.com.projetobackend.sender.ProcessaOrdemMessageSender;
 
 /**
