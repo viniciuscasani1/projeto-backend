@@ -1,7 +1,9 @@
-package br.com.projetobackend.commons;
+package br.com.projetobackend.repository;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,17 +16,15 @@ import org.springframework.jdbc.support.KeyHolder;
 /**
  * @author vinicius.casani
  * @version 1.0
- * @since 01/02/2019.
+ * @since 28/01/2019.
  */
-public abstract class AbstractRespositoryTemplate implements RespositoryTemplate {
+public abstract class AbstractRepository {
 
+    @Inject
     private JdbcTemplate jdbcTemplate;
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    protected AbstractRespositoryTemplate( JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate ) {
-        this.jdbcTemplate = jdbcTemplate;
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
+    @Inject
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
         return this.namedParameterJdbcTemplate;
@@ -41,9 +41,9 @@ public abstract class AbstractRespositoryTemplate implements RespositoryTemplate
         return jdbcTemplate.query( sql, rowMapper );
     }
 
-    public void update(String sql, Map<String, Object> parameters) {
+    public void update( String sql, Map<String, Object> parameters ) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource( parameters );
-        this.getNamedParameterJdbcTemplate().update(sql, parameterSource);
+        this.getNamedParameterJdbcTemplate().update( sql, parameterSource );
     }
 
 }

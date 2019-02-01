@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.projetobackend.commons.AbstractRepository;
 import br.com.projetobackend.model.Ordem;
 
 /**
@@ -17,10 +16,9 @@ import br.com.projetobackend.model.Ordem;
 @Repository
 public class OrdemRepository extends AbstractRepository {
 
-
     public List<Ordem> listar() {
 
-        return getRespositoryTemplate().query( "select * from tb_ordem", ( resultSet, i ) -> {
+        return super.query( "select * from tb_ordem", ( resultSet, i ) -> {
 
             Ordem ordem = new Ordem();
             ordem.setIdOrdem( resultSet.getLong( "id_ordem" ) );
@@ -38,7 +36,7 @@ public class OrdemRepository extends AbstractRepository {
         parameters.put( "status", ordem.getStatus() );
         parameters.put( "descr", ordem.getDescricaoOrdem() );
 
-        Long id = getRespositoryTemplate().insert(
+        Long id = super.insert(
                     "INSERT INTO TB_ORDEM (VALOR_ORDEM, STATUS, DESCRICAO_ORDEM) VALUES ( :vl_ordem, :status, :descr )", parameters, "id_ordem" );
         ordem.setIdOrdem( id );
         return ordem;
@@ -49,7 +47,7 @@ public class OrdemRepository extends AbstractRepository {
         parameters.put( "id_ordem", ordem.getIdOrdem() );
         parameters.put( "status", ordem.getStatus() );
 
-        getRespositoryTemplate().update( "UPDATE TB_ORDEM SET STATUS = :status WHERE ID_ORDEM = :id_ordem", parameters );
+        super.update( "UPDATE TB_ORDEM SET STATUS = :status WHERE ID_ORDEM = :id_ordem", parameters );
     }
 
 }
