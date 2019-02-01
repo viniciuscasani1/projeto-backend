@@ -12,7 +12,7 @@ Executar `docker-compose up`
 
 # Monitorar filas
 
-Acessar RabbitMQ atraves do endereço http://localhost:15672 
-Para logar utilizar:
-usuario: guest
+Acessar RabbitMQ atraves do endereço http://localhost:15672 \n
+Para logar utilizar:\n
+usuario: guest\n
 senha: guest
