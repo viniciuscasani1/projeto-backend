@@ -19,13 +19,11 @@ public class OrdemRepository extends AbstractRepository {
     public List<Ordem> listar() {
 
         return super.query( "select * from tb_ordem", ( resultSet, i ) -> {
-
             Ordem ordem = new Ordem();
             ordem.setIdOrdem( resultSet.getLong( "id_ordem" ) );
             ordem.setStatus( resultSet.getString( "status" ) );
             ordem.setValorOrdem( resultSet.getDouble( "valor_ordem" ) );
             ordem.setDescricaoOrdem( resultSet.getString( "descricao_ordem" ) );
-
             return ordem;
         } );
     }

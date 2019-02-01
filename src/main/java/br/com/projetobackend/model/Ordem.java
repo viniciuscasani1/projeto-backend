@@ -19,7 +19,7 @@ public class Ordem {
         return idOrdem;
     }
 
-    public void setIdOrdem(Long idOrdem) {
+    public void setIdOrdem( Long idOrdem ) {
         this.idOrdem = idOrdem;
     }
 
@@ -27,7 +27,7 @@ public class Ordem {
         return valorOrdem;
     }
 
-    public void setValorOrdem(Double valorOrdem) {
+    public void setValorOrdem( Double valorOrdem ) {
         this.valorOrdem = valorOrdem;
     }
 
@@ -35,7 +35,7 @@ public class Ordem {
         return descricaoOrdem;
     }
 
-    public void setDescricaoOrdem(String descricaoOrdem) {
+    public void setDescricaoOrdem( String descricaoOrdem ) {
         this.descricaoOrdem = descricaoOrdem;
     }
 
@@ -43,17 +43,17 @@ public class Ordem {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus( String status ) {
         this.status = status;
     }
 
     @Override
     public String toString() {
         return "Ordem{" +
-                "idOrdem=" + idOrdem +
-                ", valorOrdem=" + valorOrdem +
-                ", descricaoOrdem='" + descricaoOrdem + '\'' +
-                ", status='" + status + '\'' +
-                '}';
+                    "idOrdem=" + idOrdem +
+                    ", valorOrdem=" + valorOrdem +
+                    ", descricaoOrdem='" + descricaoOrdem + '\'' +
+                    ", status='" + status + '\'' +
+                    '}';
     }
 }

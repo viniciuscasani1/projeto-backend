@@ -24,19 +24,19 @@ public class OrdemService {
     private final OrdemRepository ordemRepository;
 
     @Inject
-    public OrdemService(ProcessaOrdemMessageSender processaOrdemMessageSender, OrdemRepository ordemRepository) {
+    public OrdemService( ProcessaOrdemMessageSender processaOrdemMessageSender, OrdemRepository ordemRepository ) {
         this.processaOrdemMessageSender = processaOrdemMessageSender;
         this.ordemRepository = ordemRepository;
     }
 
-    public void saveOrdem(Ordem ordem) {
-        ordem = ordemRepository.save(ordem);
-        processaOrdemMessageSender.sendProcessaAlteracaoLote(ordem);
+    public void saveOrdem( Ordem ordem ) {
+        ordem = ordemRepository.save( ordem );
+        processaOrdemMessageSender.sendProcessaAlteracaoLote( ordem );
     }
 
-    public void updateOrdem(Ordem ordem) {
-        ordem.setStatus("PROCESSADA");
-        ordemRepository.update(ordem);
+    public void updateOrdem( Ordem ordem ) {
+        ordem.setStatus( "PROCESSADA" );
+        ordemRepository.update( ordem );
     }
 
     public List<Ordem> findOrdens() {

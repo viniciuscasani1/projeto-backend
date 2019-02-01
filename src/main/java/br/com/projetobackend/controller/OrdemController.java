@@ -18,23 +18,23 @@ import br.com.projetobackend.service.OrdemService;
  * @since 29/01/2019.
  */
 @RestController
-@RequestMapping("ordem")
+@RequestMapping( "ordem" )
 public class OrdemController {
 
     private final OrdemService ordemService;
 
     @Inject
-    public OrdemController(OrdemService ordemService) {
+    public OrdemController( OrdemService ordemService ) {
         this.ordemService = ordemService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping( method = RequestMethod.GET )
     public List<Ordem> findOrdens() {
         return ordemService.findOrdens();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void saveOrdem(@RequestBody Ordem ordem) {
-        ordemService.saveOrdem(ordem);
+    @RequestMapping( method = RequestMethod.POST )
+    public void saveOrdem( @RequestBody Ordem ordem ) {
+        ordemService.saveOrdem( ordem );
     }
 }

@@ -16,9 +16,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 
-/**
- * Created by gilso.manfredi on 24/08/2016.
- */
 @Configuration
 public class ConfigurationForObjectMapper {
 
@@ -30,13 +27,13 @@ public class ConfigurationForObjectMapper {
         JSR310Module jsr310Module = new JSR310Module();
 
         JavaTimeModule javaTimeModule = new JavaTimeModule();
-        javaTimeModule.addDeserializer( LocalDateTime.class, new LocalDateTimeDeserializer( DateTimeFormatter.ISO_DATE_TIME));
-        javaTimeModule.addDeserializer( LocalTime.class, new LocalTimeDeserializer( DateTimeFormatter.ISO_TIME));
+        javaTimeModule.addDeserializer( LocalDateTime.class, new LocalDateTimeDeserializer( DateTimeFormatter.ISO_DATE_TIME ) );
+        javaTimeModule.addDeserializer( LocalTime.class, new LocalTimeDeserializer( DateTimeFormatter.ISO_TIME ) );
 
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure( DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.configure( SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        objectMapper.registerModules(jsr310Module, javaTimeModule);
+        objectMapper.configure( DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false );
+        objectMapper.configure( SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false );
+        objectMapper.registerModules( jsr310Module, javaTimeModule );
 
         return objectMapper;
     }

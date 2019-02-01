@@ -1,6 +1,7 @@
 package br.com.projetobackend.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -27,47 +28,47 @@ public class ConfigurationRabbit implements RabbitListenerConfigurer {
 
     @Bean
     Queue filaProcessaOrdem() {
-        return QueueBuilder.durable(FILA_PROCESSA_ORDEM).build();
+        return QueueBuilder.durable( FILA_PROCESSA_ORDEM ).build();
     }
 
     @Bean
     Queue filaProcessaOrdemDelay() {
-        return QueueBuilder.durable(FILA_PROCESSA_ORDEM_DELAY).withArgument("x-message-ttl", 120000).withArgument("x-dead-letter-exchange", DELAY).build();
+        return QueueBuilder.durable( FILA_PROCESSA_ORDEM_DELAY ).withArgument( "x-message-ttl", 120000 ).withArgument( "x-dead-letter-exchange", DELAY ).build();
     }
 
     @Bean
     Exchange delay() {
-        return ExchangeBuilder.topicExchange(DELAY).build();
+        return ExchangeBuilder.topicExchange( DELAY ).build();
     }
 
     @Bean
-    Binding binding(Queue filaProcessaOrdem, TopicExchange delay) {
-        return BindingBuilder.bind(filaProcessaOrdem).to(delay).with(FILA_PROCESSA_ORDEM_DELAY);
+    Binding binding( Queue filaProcessaOrdem, TopicExchange delay ) {
+        return BindingBuilder.bind( filaProcessaOrdem ).to( delay ).with( FILA_PROCESSA_ORDEM_DELAY );
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
-        final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
+    public RabbitTemplate rabbitTemplate( final ConnectionFactory connectionFactory ) {
+        final RabbitTemplate rabbitTemplate = new RabbitTemplate( connectionFactory );
+        rabbitTemplate.setMessageConverter( producerJackson2MessageConverter() );
         return rabbitTemplate;
     }
 
     @Bean
     public Jackson2JsonMessageConverter producerJackson2MessageConverter() {
 
-        return new Jackson2JsonMessageConverter(objectMapper);
+        return new Jackson2JsonMessageConverter( objectMapper );
 
     }
 
     @Override
-    public void configureRabbitListeners(RabbitListenerEndpointRegistrar registrar) {
-        registrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
+    public void configureRabbitListeners( RabbitListenerEndpointRegistrar registrar ) {
+        registrar.setMessageHandlerMethodFactory( messageHandlerMethodFactory() );
     }
 
     @Bean
     MessageHandlerMethodFactory messageHandlerMethodFactory() {
         DefaultMessageHandlerMethodFactory messageHandlerMethodFactory = new DefaultMessageHandlerMethodFactory();
-        messageHandlerMethodFactory.setMessageConverter(consumerJackson2MessageConverter());
+        messageHandlerMethodFactory.setMessageConverter( consumerJackson2MessageConverter() );
         return messageHandlerMethodFactory;
     }
 
