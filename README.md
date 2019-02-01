@@ -8,7 +8,8 @@ Na pasta do projeto Executar o comando `docker-compose build`
 
 # Running
 
-Executar `docker-compose up`
+Executar `docker-compose up` <br />
+Ao executar este comando o banco de dados, o rabbitMQ e a aplicação serão iniciadas
 
 # Monitorar filas
 
