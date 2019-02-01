@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: rabbit-projeto
+    ports:
+      - 15672:15672
+      - 5672:5672
+      - 25676:25676
+    environment:
+      - HOST_NAME=rabbit
+  db:
+    image: postgres:9.6
+    container_name: postgres-projeto
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=projeto-banco
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+    volumes:
+      - /data/banco:/var/postgres/data
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbit
+      - db
+    ports:
+      - 8080:8080
